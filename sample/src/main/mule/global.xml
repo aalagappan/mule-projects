@@ -4,8 +4,9 @@
 	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
-	<flow name="sampleFlow" doc:id="a5cc6b8b-2a77-48e5-9434-9fe82140f2ed" >
-		<http:listener doc:name="Listener" doc:id="9596cc2b-9927-4f56-a1e1-3997388fbdb0" config-ref="HTTP_Listener_config" path="/hello"/>
-		<logger level="INFO" doc:name="Logger" doc:id="465c334f-42ed-4aeb-9f68-d970541dac99" />
-	</flow>
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b6f213c3-9abf-476b-a67b-1390dd8ceac4" >
+		<http:listener-connection host="${http.host}" port="${http.port}" />
+	</http:listener-config>
+	<configuration-properties doc:name="Configuration properties" doc:id="90c0a88e-a8d4-4006-b26f-ac2884313a7d" file="${env}_config.yaml" />
+	<global-property doc:name="Global Property" doc:id="4dc998c3-ce15-4644-bd5d-5290818c420c" name="env" value="dev" />
 </mule>
