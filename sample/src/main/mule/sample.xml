@@ -8,6 +8,8 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<http:listener doc:name="Listener" doc:id="9596cc2b-9927-4f56-a1e1-3997388fbdb0" config-ref="HTTP_Listener_config" path="/hello"/>
 		<set-payload value="Hello World!" doc:name="Set Payload" doc:id="ab40d7cc-63cb-424f-9033-f83d97cc46cb" />
 		<logger level="INFO" doc:name="Logger" doc:id="465c334f-42ed-4aeb-9f68-d970541dac99" />
+		<set-payload value="Hello World from Branch" doc:name="Set Payload" doc:id="6c22dd7d-a07a-4b5c-ab02-f3c2e1ca15a0" />
 		<set-payload value="Hello World from Master" doc:name="Set Payload" doc:id="28fbea96-34f0-43f6-b85e-869686cb5dc6" />
+		<set-payload value="Again Hello World from Branch" doc:name="Set Payload" doc:id="433c72fc-5c37-4839-9373-d9782263ba52" />
 	</flow>
 </mule>
