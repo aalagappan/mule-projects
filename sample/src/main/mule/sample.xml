@@ -6,6 +6,7 @@
 http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
 	<flow name="sampleFlow" doc:id="a5cc6b8b-2a77-48e5-9434-9fe82140f2ed" >
 		<http:listener doc:name="Listener" doc:id="9596cc2b-9927-4f56-a1e1-3997388fbdb0" config-ref="HTTP_Listener_config" path="/hello"/>
+		<set-payload value="Hello World!" doc:name="Set Payload" doc:id="ab40d7cc-63cb-424f-9033-f83d97cc46cb" />
 		<logger level="INFO" doc:name="Logger" doc:id="465c334f-42ed-4aeb-9f68-d970541dac99" />
 	</flow>
 </mule>
