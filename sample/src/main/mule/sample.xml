@@ -11,5 +11,6 @@ http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/htt
 		<set-payload value="Hello World from Branch" doc:name="Set Payload" doc:id="6c22dd7d-a07a-4b5c-ab02-f3c2e1ca15a0" />
 		<set-payload value="Hello World from Master" doc:name="Set Payload" doc:id="28fbea96-34f0-43f6-b85e-869686cb5dc6" />
 		<set-payload value="Again Hello World from Branch" doc:name="Set Payload" doc:id="433c72fc-5c37-4839-9373-d9782263ba52" />
+		<logger level="INFO" doc:name="Logger" doc:id="2ca4fae8-778a-4df1-85c1-b2c8ff9e9635" />
 	</flow>
 </mule>
