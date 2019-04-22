@@ -15,6 +15,7 @@ http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/cu
 			<set-payload value="#[output text/plain --- payload as Number * 10]" doc:name="Set Payload" doc:id="adcaf4aa-9bd3-4baf-8a14-c72a79e30914" />
 			<logger level="INFO" doc:name="Logger" doc:id="24619957-2625-404a-87ee-19d2ec1993bb" message="#[payload]" />
 		</ee:cache>
+		<logger level="INFO" doc:name="Logger" doc:id="998f242a-a24a-4967-b355-17222ef2441b" message="after cache"/>
 	</flow>
 	<flow name="Flow" doc:id="dff1b88f-ddf8-4be0-adf5-ffedf3e66c97" >
 		<http:listener doc:name="Listener" doc:id="d0984974-d8f2-4c94-9cef-eb3eb8ea64c3" config-ref="HTTP_Listener_config" path="/flow"/>
