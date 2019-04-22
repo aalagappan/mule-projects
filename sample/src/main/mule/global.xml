@@ -1,12 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:db="http://www.mulesoft.org/schema/mule/db" xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:os="http://www.mulesoft.org/schema/mule/os" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/os http://www.mulesoft.org/schema/mule/os/current/mule-os.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="b6f213c3-9abf-476b-a67b-1390dd8ceac4" >
-		<http:listener-connection host="${http.host}" port="${http.port}" />
+		<http:listener-connection host="${secure::http.host}" port="${http.port}" />
 	</http:listener-config>
-	<configuration-properties doc:name="Configuration properties" doc:id="90c0a88e-a8d4-4006-b26f-ac2884313a7d" file="${env}_config.yaml" />
+	<configuration-properties doc:name="Configuration properties" doc:id="90c0a88e-a8d4-4006-b26f-ac2884313a7d" file="${env}_config.properties" />
 	<global-property doc:name="Global Property" doc:id="4dc998c3-ce15-4644-bd5d-5290818c420c" name="env" value="dev" />
+	<os:config name="ObjectStore_Config" doc:name="ObjectStore Config" doc:id="4722bc32-372a-43f4-869a-0c0e3c107d37" />
+	<ee:object-store-caching-strategy name="Caching_Strategy" doc:name="Caching Strategy" doc:id="cda6fc6b-9ed0-4b88-83f2-20c5f3086bb3" keyGenerationExpression="#[payload]" >
+		<os:private-object-store alias="cacheStore" config-ref="ObjectStore_Config" entryTtl="1" maxEntries="2" entryTtlUnit="MINUTES"/>
+	</ee:object-store-caching-strategy>
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="f8c02fae-1a0a-4ca9-b17a-9e51a1af6552" >
+		<db:my-sql-connection host="${db.host}" port="${db.port}" user="${db.user}" password="${secure::db.password}" database="${db.database}" />
+	</db:config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="1b738e4a-c348-4409-9bda-86940314ab19" file="${env}_config.properties" key="password" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="56e740a6-019e-42d2-910c-e7fb7d12ffa1" >
+		<http:request-connection host="${secure::http.host}" port="${http.port}" />
+	</http:request-config>
 </mule>
